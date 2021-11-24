@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="static">
     <AppHeader @toggleSidebar= "sidebarOpen = !sidebarOpen"/>
-    <Sidebar :open= "sidebarOpen"/>
+    <Sidebar class="absolute" :open= "sidebarOpen"/>
 
     <Nuxt />
   </div>
@@ -13,8 +13,15 @@
       return {
         sidebarOpen: false
       }
+    },
+
+    methods: {
+
+      mounted() {
+        this.$store.commit('initialiseStore');
+      }
     }
-      
+    
 
   }
 
