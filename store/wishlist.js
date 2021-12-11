@@ -21,14 +21,17 @@ export const mutations = {
         console.log(state.list)
     } else{
         const exists = state.list.filter(i => i.id === movie.id);
-        if (exists.length) {
-          exists[0].quantity = parseInt(exists[0].quantity) + parseInt(movie.quantity)
-        } else {
+        if (typeof exists !== 'undefined' && exists.length === 0) {
           state.list.push(movie)
-          console.log(state.list) }
-        
+          console.log(state.list) 
+        } else {
+          for( var i = 0; i < state.list.length; i++){ 
+              if ( state.list[i] === exists[0]) { 
+                  state.list.splice(i, 1); 
+              }
+          }
+        } 
     }
-
     localStorage.setItem('list', JSON.stringify(state.list))
   },
   
@@ -51,8 +54,6 @@ export const getters = {
     return state.list;
   },
   
-  getListLenght(state){
-    return state.list.length;
-  }
+  
   
 }

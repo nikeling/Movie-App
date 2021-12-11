@@ -2,16 +2,16 @@
     <!-- Component Start -->
 	
 		
-		<div class="mb-8    bg-gray-900 ">
-				<div class="relative"> 
+		<div class="mb-8 bg-gray-900 ">
+
+				<div class=""> 
             		<img class="object-scale-down  w-full " :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"/>
-					<p class="absolute top-0 left-0 bg-yellow-500 w-10 h-9 text-lg rounded-br-md flex justify-center shadow-md text-gray-50 font-semibold">{{ movie.vote_average }}</p>
            			<!-- <p >{{ movie.overview }}</p> -->
 				</div>
 		
 
-				<div class="">
-					<h4 class="font-sans text-xl text-gray-200  pt-2">{{ movie.original_title}}</h4>
+				<div class="flex flex-col  ">
+					<h4 class="font-sans text-xl text-gray-200  pt-2">{{ movie.original_title}} <span class="text-yellow-500 text-xl font-semibold"> &#9733; {{ movie.vote_average }}</span> </h4>
 					<p class="text-gray-400 pb-2 mb-2">
 						Released:
 						{{
@@ -23,9 +23,9 @@
 						}}
             		</p>
 					<!-- <p >{{ movie.overview }}</p> -->
-					<div>
-						<NuxtLink class="p-2 rounded-md border-2 border-red-900 text-gray-200" :to="{ name: 'movies-id', params: { id: movie.id } }">More Info</NuxtLink>
-						<button @click="addToWishlist" class=" ml-2 p-2 rounded-md border-2 border-red-900 text-gray-200" type="button">Add to wishlist </button>
+					<div class="flex flex-row">
+						<NuxtLink class="p-2 text-sm rounded-md border-2 border-red-900 text-gray-200" :to="{ name: 'movies-id', params: { id: movie.id } }">More Info</NuxtLink>
+						<button :class={onwishlist:onwishlist} @click="addToWishlist" class=" ml-2 text-sm p-2 rounded-md border-2 border-red-900 text-gray-200" type="button">Add to wishlist </button>
 					</div>
 				</div>
 				
@@ -43,16 +43,37 @@ export default {
 		movie: Object,
 				
 	},
+
+	data() {
+    return {
+      onwishlist: false
+    }
+  },
  
 	methods: {
     addToWishlist(){
       this.$store.commit('wishlist/addToWishlist', this.movie )
+	   const list = this.$store.state.wishlist.list;
+        if (typeof list !== 'undefined' && list.length === 0) {
+          this.onwishlist = false;
+        } else{
+          const exists = list.filter(i => i.id === this.movie.id);
+          if (typeof exists !== 'undefined' && exists.length === 0) {
+          this.onwishlist = false;
+        } else {
+          this.onwishlist = true;
+        } }
     }
     }
 
 }
 </script>
 
-<style>
+<style scoped>
+
+.onwishlist{
+  background-color:#7F1D1D;
+}
+
 
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div class="static">
-    <AppHeader @toggleSidebar= "sidebarOpen = !sidebarOpen"/>
+  <div class="">
+    <AppHeader  :sidebarOpen="sidebarOpen" @toggleSidebar= "sidebarOpen = !sidebarOpen"/>
     <Sidebar class="absolute" :open= "sidebarOpen"/>
 
     <Nuxt />

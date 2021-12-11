@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center min-h-screen min-w-screen bg-auto bg-no-repeat bg-center"  style="background-image: url(wallpaper.jpg)">
+    <div class="min-h-screen bg-contain "  style="background-image: url(wallpaper.jpg)">
         
         
         
