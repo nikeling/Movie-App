@@ -1,4 +1,3 @@
-
 <template>
     <div class="bg-gray-900 pb-10">
         <h1 class="ml-7 font-sans text-5xl pt-5 text-red-800">WISHLIST</h1> 
@@ -7,8 +6,6 @@
            
         </div>
     </div>
-
-  
 </template>
 
 <script>
