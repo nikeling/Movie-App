@@ -42,12 +42,12 @@ export const mutations = {
   }
 }
   
-// export const actions = {
+export const actions = {
+  addToWishlist(context, movie) {
+    context.commit('addToWishlist', movie)
+  }
 
-//   addToWishlist(context) {
-//     context.commit('addToWishlist')
-//   }
-// }
+}
 
 export const getters = {
   getList(state){

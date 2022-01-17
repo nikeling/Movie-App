@@ -1,17 +1,24 @@
-
 <template>
     <div class="bg-gray-900 min-h-screen pb-10">
-        <div class="ml-10 pt-5 flex flex-row space-x-14 items-center">
-            <h1 class="font-sans text-5xl  text-red-800">NOW PLAYING</h1> 
-            <h2 class="text-red-800" v-if="$fetchState.pending">loading...</h2>  
+        <div class="ml-20 pt-5 flex flex-row space-x-14 items-center">
+            <h1 class=" font text-5xl text-red-800">Now streaming</h1> 
+            <h2 class="mt-7 font-semibold text-xl text-gray-300" v-if="$fetchState.pending">loading...</h2>  
         </div>
-        <div class= "grid lg:grid-cols-5 lg:grid-rows-4 gap-x-7 gap-y-10 ml-20 mt-20 mr-20 ">
-            <LoadingCard v-if="$fetchState.pending"/>
-            <MovieCard v-else v-for="movie in movies.results" :movie="movie" :key="movie.id"  />
+        <div v-if="$fetchState.pending" class="grid lg:grid-cols-5 lg:grid-rows-4 gap-x-7 gap-y-10 ml-20 mt-20 mr-20 ">
+            <LoadingCard/>
+            <LoadingCard/>
+            <LoadingCard/>
+            <LoadingCard/>
+            <LoadingCard/>
         </div>
-        <div class="flex justify-center gap-x-6">
-            <button v-if="page > 1" class="flex-0 text-center text-gray-100 font-medium p-2 rounded-md bg-red-900" type="button" @click="previousPage">Previous</button>
-            <button class="flex-0 text-center text-gray-100 font-medium p-2 rounded-md bg-red-900" type="button" @click="nextPage">Next</button>
+        <div v-else>
+            <div class= "grid lg:grid-cols-5 lg:grid-rows-4 gap-x-7 gap-y-10 ml-20 mt-20 mr-20 ">
+                <MovieCard v-for="movie in movies.results" :movie="movie" :key="movie.id"  />
+            </div>
+            <div class="flex justify-center gap-x-6">
+                <button v-if="page > 1" class="flex-0 text-center text-gray-100 font-medium p-2 rounded-md bg-red-900" type="button" @click="previousPage">Previous</button>
+                <button class="flex-0 text-center text-gray-100 font-medium p-2 rounded-md bg-red-900" type="button" @click="nextPage">Next</button>
+            </div>
         </div>
     </div>
 </template>
@@ -64,5 +71,13 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+.font {
+font-family: 'Mochiy Pop P One', sans-serif;
+}
+
+</style>
 
 

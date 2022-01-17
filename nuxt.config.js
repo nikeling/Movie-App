@@ -36,10 +36,32 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/fontawesome',
+    '@nuxtjs/google-fonts'
   ],
+  fontawesome: {
+    component: 'fa',
+    icons: {
+      solid: true,
+      brands: true,
+    }
+  },
+
+  googleFonts: {
+    families: {
+      'The+Nautigal': {
+        wght: [700]},
+      'Mochiy+Pop+P+One': true,
+    }
+
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxt/http'
+  modules: [
+    '@nuxt/http',
+    'cookie-universal-nuxt',
+    ['cookie-universal-nuxt', { alias: 'cookiz' }],
+
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

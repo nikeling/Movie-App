@@ -49,7 +49,7 @@
 
     methods: {
       addToWishlist(){
-        this.$store.commit('wishlist/addToWishlist', this.movie )
+        this.$store.dispatch('wishlist/addToWishlist', this.movie )
         const list = this.$store.state.wishlist.list;
         if (typeof list !== 'undefined' && list.length === 0) {
           this.onwishlist = false;
