@@ -67,7 +67,7 @@ export default {
       } else if (this.lname.length === 0){
         this.errorlname = true;
       } else {
-
+         this.$router.push('/movies')
       }
 
     },

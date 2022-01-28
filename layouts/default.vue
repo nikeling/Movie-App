@@ -18,7 +18,9 @@
     methods: {
       mounted() {
         this.$store.commit('initialiseStore');
+        localStorage.getItem('list')
       }
+      
     }
   }
 

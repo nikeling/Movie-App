@@ -18,12 +18,10 @@ export const mutations = {
   addToWishlist(state, movie) {
     if (typeof state.list !== 'undefined' && state.list.length === 0) {
         state.list.push(movie)
-        console.log(state.list)
     } else{
         const exists = state.list.filter(i => i.id === movie.id);
         if (typeof exists !== 'undefined' && exists.length === 0) {
           state.list.push(movie)
-          console.log(state.list) 
         } else {
           for( var i = 0; i < state.list.length; i++){ 
               if ( state.list[i] === exists[0]) { 
@@ -36,7 +34,7 @@ export const mutations = {
   },
   
   clearList(state) {
-    state.list = { list: [] }
+    state.list = [];
 
     localStorage.setItem('list', JSON.stringify(state.list))
   }
