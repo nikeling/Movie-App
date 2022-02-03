@@ -5,15 +5,15 @@ export const state = () => ({
   })
   
 export const mutations = {
-
+  
   initialiseStore(state){
     if (localStorage.getItem('list')) {
-    try {
+    try{
       state.list = JSON.parse(localStorage.getItem('list'));
-    } catch(e) {
-      localStorage.removeItem('list');
-    }  
-  }},
+    }catch(e){
+      localStorage.removeItem('list')
+    }}
+  },
 
   addToWishlist(state, movie) {
     if (typeof state.list !== 'undefined' && state.list.length === 0) {
@@ -32,11 +32,20 @@ export const mutations = {
     }
     localStorage.setItem('list', JSON.stringify(state.list))
   },
+
+  removeFromWishlist(state,movie){
+    const exists = state.list.filter(i => i.id === movie.id);
+    for( var i = 0; i < state.list.length; i++){ 
+      if ( state.list[i] === exists[0]) { 
+          state.list.splice(i, 1); 
+      }} 
+    localStorage.setItem('list', JSON.stringify(state.list))
+  },
   
   clearList(state) {
     state.list = [];
 
-    localStorage.setItem('list', JSON.stringify(state.list))
+    localStorage.removeItem('list')
   }
 }
   

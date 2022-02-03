@@ -14,6 +14,10 @@
 
 <script>
 export default {
+    head() {
+    return {
+      title: 'Movie App - Latest Playing Movie Info'
+    }},
 
     methods:{
         clearList(){

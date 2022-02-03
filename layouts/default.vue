@@ -14,15 +14,13 @@
         sidebarOpen: false
       }
     },
-
-    methods: {
-      mounted() {
-        this.$store.commit('initialiseStore');
-        localStorage.getItem('list')
-      }
-      
+  
+    mounted() {
+        this.$store.commit('wishlist/initialiseStore');
+         }
     }
-  }
+  
+  
 
 </script>
 

@@ -17,7 +17,8 @@
             </p>
 			<div class="flex flex-row">
 				<NuxtLink class="p-2 text-sm rounded-md border-2 border-red-900 text-gray-200" :to="{ name: 'movies-id', params: { id: movie.id } }">More Info</NuxtLink>
-		    	<button :class={onwishlist:onwishlist} @click="addToWishlist" class=" ml-2 text-sm p-2 rounded-md border-2 border-red-900 text-gray-200" type="button">Add to wishlist </button>
+				<button v-if="exist()" @click="remove" class=" onwishlist ml-2 text-sm p-2 rounded-md border-2 border-red-900 text-gray-200" type="button">Remove</button>
+		    	<button v-else  @click="addToWishlist" class=" ml-2 text-sm p-2 rounded-md border-2 border-red-900 text-gray-200" type="button">Add to wishlist </button>
 			</div>
 		</div>
 	</div>
@@ -29,26 +30,27 @@ export default {
 				
 	},
 
-	data() {
-    return {
-      onwishlist: false
-    }
-  },
-
 	methods: {
     addToWishlist(){
       this.$store.dispatch('wishlist/addToWishlist', this.movie )
-	   const list = this.$store.state.wishlist.list;
+    },
+
+	remove(){
+		this.$store.commit('wishlist/removeFromWishlist', this.movie)
+	},
+
+	exist(){
+		const list = this.$store.state.wishlist.list;
         if (typeof list !== 'undefined' && list.length === 0) {
-          this.onwishlist = false;
+          return false;
         } else{
           const exists = list.filter(i => i.id === this.movie.id);
-          if (typeof exists !== 'undefined' && exists.length === 0) {
-          this.onwishlist = false;
-        } else {
-          this.onwishlist = true;
+          	if (typeof exists !== 'undefined' && exists.length === 0) {
+          	return false;
+        	} else {
+         	 return true;
         } }
-    }
+	}
     }
 }
 </script>

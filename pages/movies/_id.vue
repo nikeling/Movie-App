@@ -21,7 +21,8 @@
           <p class="text-gray-100 mt-3"><span class="underline">Duration:</span> {{ movie.runtime }} minutes</p>
           <p class=" text-gray-100 mt-3"><span class="underline">Rating:</span> {{ movie.vote_average }}</p>
           <p class="flex-1 text-gray-100 mt-3 w-96"><span class="underline">Overview:</span> {{ movie.overview }}</p>
-          <button :class={onwishlist:onwishlist} @click="addToWishlist" class="p-2 rounded-md border-2 border-red-900 text-gray-200" type="button"> Add to wishlist </button>
+          <button v-if="exist()" @click="remove" class=" onwishlist ml-2 text-sm p-2 rounded-md border-2 border-red-900 text-gray-200" type="button">Remove</button>
+		    	<button v-else  @click="addToWishlist" class=" ml-2 text-sm p-2 rounded-md border-2 border-red-900 text-gray-200" type="button">Add to wishlist </button>
         </div>
       </div>
     </div>
@@ -38,7 +39,6 @@
   data() {
     return {
       movie: '',
-      onwishlist: false
     }
   },
     
@@ -48,20 +48,29 @@
     },
 
     methods: {
+
       addToWishlist(){
         this.$store.dispatch('wishlist/addToWishlist', this.movie )
-        const list = this.$store.state.wishlist.list;
+      },
+
+      remove(){
+		  this.$store.commit('wishlist/removeFromWishlist', this.movie)
+	    },
+
+      exist(){
+		    const list = this.$store.state.wishlist.list;
         if (typeof list !== 'undefined' && list.length === 0) {
-          this.onwishlist = false;
+          return false;
         } else{
           const exists = list.filter(i => i.id === this.movie.id);
-          if (typeof exists !== 'undefined' && exists.length === 0) {
-          this.onwishlist = false;
-        } else {
-          this.onwishlist = true;
-        } }},
+          	if (typeof exists !== 'undefined' && exists.length === 0) {
+          	return false;
+        	} else {
+         	 return true;
+        } }
+      }
     }
-  }
+}
 </script>
 <style scoped>
 .onwishlist{
